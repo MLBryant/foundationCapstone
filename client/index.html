@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>MTG app</h1>
+    </header>
+    <form id = 'search' action="">
+        <label for="name">Card Name</label>
+        <input id = 'name' type="text">
+        <label for="type">Type</label>
+        <input id = 'type' type="text">
+        <label for="subtype">Subtype</label>
+        <input id = 'subtype' type="text">
+        <div>
+            <input id = 'white' type="checkbox" value="white">
+            <label for="white"> White</label>
+            <input id = 'green' type="checkbox" value="green">
+            <label for="green"> green</label>
+            <input id = 'blue' type="checkbox" value="blue">
+            <label for="blue"> blue</label>
+            <input id = 'red' type="checkbox" value="red">
+            <label for="red"> red</label>
+            <input id = 'black' type="checkbox" value="black">
+            <label for="black"> black</label>
+        </div>
+        <label for="cmc">Converted Mana Cost</label>
+        <input id = 'cmc' type="number">
+        <label for="text">Text Contains</label>
+        <input id = 'text' type="text">
+        <label for="power">Power</label>
+        <input id = 'power' type="number">
+        <label for="toughness">Toughness</label>
+        <input id = 'toughness' type="number">
+        <label for="loyalty">Loyalty</label>
+        <input id = 'loyalty' type="number">
+        <input type="submit">
+    </form>
+    <br>
+    <br>
+    <div id = 'cards'></div>
+    <div id = 'pagebtns'>
+        <button id = 'previous' class = 'btn hide'> < prev </button>
+        <button id = 'next' class = 'btn hide'> next > </button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

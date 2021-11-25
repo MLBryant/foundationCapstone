@@ -1,0 +1,44 @@
+body {
+    background-color: darkgrey;
+}
+
+img {
+    height: 40vh;
+    margin-bottom: 2%;
+}
+
+header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#search {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 5%;
+}
+
+#cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-self: center;
+}
+
+#pagebtns {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.btn {
+    margin-inline: 3%;
+}
+
+.hide {
+    display: none;
+}
