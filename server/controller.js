@@ -1,5 +1,17 @@
 const axios = require('axios')
 const URL = `https://api.magicthegathering.io/v1/cards?`
+require("dotenv").config();
+const { CONNECTION_STRING } = process.env;
+
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize(CONNECTION_STRING, {
+    dialect: "postgres",
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false,
+        },
+    },
+});
 
 module.exports = {
     searchCard: (req, res) => {
@@ -22,14 +34,14 @@ module.exports = {
             let namesArr = []
             dbRes.data.cards.forEach(elem => {
                 if (elem.hasOwnProperty('imageUrl')) {
-                    let {name, imageUrl, types, subtypes, manacost, cmc, multiverseid} = elem
+                    let {name, imageUrl, types, subtypes, manaCost, cmc, multiverseid} = elem
                     if (namesArr.indexOf(name) == -1) {
                         let cardObj = {
                             name: name,
                             imageUrl: imageUrl,
                             types: types,
                             subtypes: subtypes,
-                            manacost: manacost,
+                            manaCost: manaCost,
                             cmc: cmc,
                             multiverseid: multiverseid
                         }
@@ -48,5 +60,38 @@ module.exports = {
             resArr.sort((a, b) => a.name.localeCompare(b.name))
             res.status(200).send({cards: resArr, morePages: areMorePages})
         })
+    },
+    newDeck: (req, res) => {
+        let {deckName} = req.body
+        sequelize.query(`
+            INSERT INTO decks (name)
+            VALUES (${deckName});
+        `)
+        .then(dbRes => res.status(200).send(dbRes[0]))
+    },
+    seedDb: (req, res) => {
+        sequelize.query(`
+            drop table if exists decks;
+            drop table if exists deckcards;
+
+            create table decks (
+                deck_id serial primary key, 
+                name varchar
+            );
+
+            create table deckcards (
+                card_id serial primary key,
+                name varchar,
+                imageUrl varchar,
+                types varchar, 
+                subtypes varchar,
+                manaCost varchar,
+                deck_id integer references decks(deck_id)
+            );
+            `)
+            .then(() => {
+                console.log('Db seeded');
+                res.sendStatus(200)
+            })
     }
 }

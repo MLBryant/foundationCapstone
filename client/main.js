@@ -1,4 +1,4 @@
-const search = document.getElementById('search')
+const searchForm = document.getElementById('search')
 const nameField = document.getElementById('name')
 const typeField = document.getElementById('type')
 const subtypeField = document.getElementById('subtype')
@@ -15,6 +15,8 @@ const loyaltyField = document.getElementById('loyalty')
 const cardDiv = document.getElementById('cards')
 const prevBtn = document.getElementById('previous')
 const nextBtn = document.getElementById('next')
+const deckNameField = document.getElementById('deckname')
+const deckForm = document.getElementById('createdeck')
 
 let searchInput = {}
 let cardsArr = []
@@ -86,13 +88,14 @@ const searchCard = event => {
     .then(res => {
         console.log(res.data);
         for (i = 0; i < res.data.cards.length; i++) {
-            let {name, imageUrl, types, manacost} = res.data.cards[i]
+            let {name, imageUrl, types, subtypes, manaCost,} = res.data.cards[i]
             let cardsArrObj = {
                 id: i,
                 name: name,
                 imageUrl: imageUrl,
                 types: types,
-                manacost: manacost
+                subtypes: subtypes,
+                manaCost: manaCost
             }
             cardsArr.push(cardsArrObj)
             let newCard = document.createElement('img')
@@ -176,11 +179,14 @@ const previousPage = event => {
     })
 }
 
-const addCardToDeck = event => {
+const createDeck = event => {
     event.preventDefault()
-    
+    let newDeck = {
+        deckName: deckNameField.value
+    }
+    axios.post(`/deckname`, newDeck)
 }
 
-search.addEventListener('submit', searchCard)
+searchForm.addEventListener('submit', searchCard)
 prevBtn.addEventListener('click', previousPage)
 nextBtn.addEventListener('click', nextPage)
