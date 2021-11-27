@@ -8,43 +8,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>MTG app</h1>
-    </header>
-    <form id = 'search' action="">
-        <label for="name">Card Name</label>
-        <input id = 'name' type="text">
-        <label for="type">Type</label>
-        <input id = 'type' type="text">
-        <label for="subtype">Subtype</label>
-        <input id = 'subtype' type="text">
-        <div>
-            <input id = 'white' type="checkbox" value="white">
-            <label for="white"> White</label>
-            <input id = 'green' type="checkbox" value="green">
-            <label for="green"> green</label>
-            <input id = 'blue' type="checkbox" value="blue">
-            <label for="blue"> blue</label>
-            <input id = 'red' type="checkbox" value="red">
-            <label for="red"> red</label>
-            <input id = 'black' type="checkbox" value="black">
-            <label for="black"> black</label>
+    <div>
+        <header>
+            <h1>MTG app</h1>
+        </header>
+    </div>
+    <div>
+        <form id = 'search' action="">
+            <label for="name">Card Name</label>
+            <input id = 'name' type="text">
+            <label for="type">Type</label>
+            <input id = 'type' type="text">
+            <label for="subtype">Subtype</label>
+            <input id = 'subtype' type="text">
+            <div>
+                <input id = 'white' type="checkbox" value="white">
+                <label for="white"> White</label>
+                <input id = 'green' type="checkbox" value="green">
+                <label for="green"> Green</label>
+                <input id = 'blue' type="checkbox" value="blue">
+                <label for="blue"> Blue</label>
+                <br>
+                <input id = 'red' type="checkbox" value="red">
+                <label for="red"> Red</label>
+                <input id = 'black' type="checkbox" value="black">
+                <label for="black"> Black</label>
+            </div>
+            <label for="cmc">Converted Mana Cost</label>
+            <input id = 'cmc' type="number">
+            <label for="text">Text Contains</label>
+            <input id = 'text' type="text">
+            <label for="power">Power</label>
+            <input id = 'power' type="number">
+            <label for="toughness">Toughness</label>
+            <input id = 'toughness' type="number">
+            <label for="loyalty">Loyalty</label>
+            <input id = 'loyalty' type="number">
+            <input type="submit">
+        </form>
+        <div id = 'decks'>
+            <h3>Decks</h3>
         </div>
-        <label for="cmc">Converted Mana Cost</label>
-        <input id = 'cmc' type="number">
-        <label for="text">Text Contains</label>
-        <input id = 'text' type="text">
-        <label for="power">Power</label>
-        <input id = 'power' type="number">
-        <label for="toughness">Toughness</label>
-        <input id = 'toughness' type="number">
-        <label for="loyalty">Loyalty</label>
-        <input id = 'loyalty' type="number">
-        <input type="submit">
-    </form>
-    <br>
-    <br>
-    <div id = 'cards'></div>
+        <div id = 'cards'></div>
+    </div>
     <div id = 'pagebtns'>
         <button id = 'previous' class = 'btn hide'> < prev </button>
         <button id = 'next' class = 'btn hide'> next > </button>

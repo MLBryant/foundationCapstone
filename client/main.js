@@ -17,6 +17,7 @@ const prevBtn = document.getElementById('previous')
 const nextBtn = document.getElementById('next')
 
 let searchInput = {}
+let cardsArr = []
 let pageNumber = 1
 
 const searchCard = event => {
@@ -29,12 +30,13 @@ const searchCard = event => {
         nextBtn.classList.add('hide')
     }
     pageNumber = 1
+    cardsArr = []
     searchInput = {}
     if (nameField.value) {
         searchInput.name = nameField.value
     }
     if (typeField.value) {
-        searchInput.type = typeField.value
+        searchInput.types = typeField.value
     }
     if (subtypeField.value) {
         searchInput.subtypes = subtypeField.value
@@ -82,13 +84,25 @@ const searchCard = event => {
     searchInput.page = pageNumber
     axios.post(`/search`, searchInput)
     .then(res => {
-        for (i = 0; i < res.data.length; i++) {
-            let {imageUrl} = res.data[i]
+        console.log(res.data);
+        for (i = 0; i < res.data.cards.length; i++) {
+            let {name, imageUrl, types, manacost} = res.data.cards[i]
+            let cardsArrObj = {
+                id: i,
+                name: name,
+                imageUrl: imageUrl,
+                types: types,
+                manacost: manacost
+            }
+            cardsArr.push(cardsArrObj)
             let newCard = document.createElement('img')
             newCard.src = imageUrl
+            newCard.id = i
             cardDiv.appendChild(newCard)
         }
-        nextBtn.classList.remove('hide')
+        if (res.data.morePages == true) {
+            nextBtn.classList.remove('hide')
+        }
     })
 }
 
@@ -102,17 +116,28 @@ const nextPage = event => {
         nextBtn.classList.add('hide')
     }
     pageNumber++
+    cardsArr = []
     searchInput.page = pageNumber
     axios.post('/search', searchInput)
     .then(res => {
-        for (i = 0; i < res.data.length; i++) {
-            let {imageUrl} = res.data[i]
+        for (i = 0; i < res.data.cards.length; i++) {
+            let {name, imageUrl, types, manacost} = res.data.cards[i]
+            let cardsArrObj = {
+                id: i,
+                name: name,
+                imageUrl: imageUrl,
+                types: types,
+                manacost: manacost
+            }
             let newCard = document.createElement('img')
             newCard.src = imageUrl
+            newCard.id = i
             cardDiv.appendChild(newCard)
         }
         prevBtn.classList.remove('hide')
-        nextBtn.classList.remove('hide')
+        if (res.data.morePages == true) {
+            nextBtn.classList.remove('hide')
+        }
     })
 }
 
@@ -126,13 +151,22 @@ const previousPage = event => {
         nextBtn.classList.add('hide')
     }
     pageNumber--
+    cardsArr = []
     searchInput.page = pageNumber
     axios.post('/search', searchInput)
     .then(res => {
-        for (i = 0; i < res.data.length; i++) {
-            let {imageUrl} = res.data[i]
+        for (i = 0; i < res.data.cards.length; i++) {
+            let {name, imageUrl, types, manacost} = res.data.cards[i]
+            let cardsArrObj = {
+                id: i,
+                name: name,
+                imageUrl: imageUrl,
+                types: types,
+                manacost: manacost
+            }
             let newCard = document.createElement('img')
             newCard.src = imageUrl
+            newCard.id = i
             cardDiv.appendChild(newCard)
         }
         if (pageNumber != 1) {
@@ -140,6 +174,11 @@ const previousPage = event => {
         }
         nextBtn.classList.remove('hide')
     })
+}
+
+const addCardToDeck = event => {
+    event.preventDefault()
+    
 }
 
 search.addEventListener('submit', searchCard)
