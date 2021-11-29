@@ -358,11 +358,13 @@ const deleteDeck = event => {
 const mouseoverImg = (source) => {
     hoverImg.src = source
     hoverImg.classList.remove('hide')
+    hoverImg.style.zIndex = 100
 }
 
 const mouseoutImg = () => {
     hoverImg.classList.add('hide')
     hoverImg.src = ''
+    hoverImg.style.zIndex = -1
 }
 
 getDecks()

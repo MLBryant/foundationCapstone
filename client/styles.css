@@ -92,5 +92,5 @@ input[type='number']{
     position: fixed;
     left: 37%;
     top: 10%;
-    z-index: 100;
+    z-index: -1;
 }
