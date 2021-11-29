@@ -8,57 +8,73 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div>
-        <header>
-            <h1>MTG app</h1>
-        </header>
-    </div>
-    <div>
+    <header>
+        <h1>MTG app</h1>
+    </header>
+    <section id = 'searchdiv' class = 'column'>
+        <h2>Card Search</h2>
         <form id = 'search' action="">
             <label for="name">Card Name</label>
-            <input id = 'name' type="text">
+            <input id = 'name' type="text" size = 15>
             <label for="type">Type</label>
-            <input id = 'type' type="text">
+            <input id = 'type' type="text" size = 15>
             <label for="subtype">Subtype</label>
-            <input id = 'subtype' type="text">
-            <div>
+            <input id = 'subtype' type="text" size = 15>
+            <div class = 'colorbox'>
                 <input id = 'white' type="checkbox" value="white">
                 <label for="white"> White</label>
+            </div>
+            <div class = 'colorbox'>
                 <input id = 'green' type="checkbox" value="green">
                 <label for="green"> Green</label>
+            </div>    
+            <div class = 'colorbox'>
                 <input id = 'blue' type="checkbox" value="blue">
                 <label for="blue"> Blue</label>
-                <br>
+            </div>
+            <div class = 'colorbox'>
                 <input id = 'red' type="checkbox" value="red">
                 <label for="red"> Red</label>
+            </div>
+            <div class = 'colorbox'>
                 <input id = 'black' type="checkbox" value="black">
                 <label for="black"> Black</label>
             </div>
-            <label for="cmc">Converted Mana Cost</label>
-            <input id = 'cmc' type="number">
             <label for="text">Text Contains</label>
-            <input id = 'text' type="text">
+            <input id = 'text' type="text" size = 15>
+            <label for="cmc">Converted Mana Cost</label>
+            <input id = 'cmc' type="number" size = 5>
             <label for="power">Power</label>
-            <input id = 'power' type="number">
+            <input id = 'power' type="number" size = 5>
             <label for="toughness">Toughness</label>
-            <input id = 'toughness' type="number">
-            <label for="loyalty">Loyalty</label>
-            <input id = 'loyalty' type="number">
+            <input id = 'toughness' type="number" size = 5>
+            <label for="loyalty">Loyalty</label>                <input id = 'loyalty' type="number" size = 5>
             <input type="submit">
         </form>
-        <div id = 'decks'>
-            <h3>Decks</h3>
-            <form id = 'createdeck' action="">
-                <input id = 'deckname' type="text">
-                <input type="submit" value="Create Deck">
-            </form>
+    </section>
+    <section id = 'cardsdiv'>
+        <h2>Search Results</h2>
+        <div id = 'cards' class = 'column'></div>
+        <div id = 'pagebtns'>
+            <button id = 'previous' class = 'btn hide'> < Prev Page </button>
+            <button id = 'next' class = 'btn hide'> Next Page > </button>
         </div>
-        <div id = 'cards'></div>
-    </div>
-    <div id = 'pagebtns'>
-        <button id = 'previous' class = 'btn hide'> < prev </button>
-        <button id = 'next' class = 'btn hide'> next > </button>
-    </div>
+    </section>
+    <section id = 'decks' class = 'column'>
+        <h2>Decks</h2>
+        <form id = 'createdeck' action="">
+            <input id = 'deckname' type="text">
+            <input type="submit" value="Create Deck" size = 15>
+        </form>
+        <select id="deckselect">
+        </select>
+        <div id = 'decktitlediv'>
+            <h3 id = 'decktitle'></h3>
+        </div>
+        <div id = 'deck'></div>
+    </section>
+
+    <img id = 'cardhoverimg' class = 'hide' src="" alt="">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
 </body>

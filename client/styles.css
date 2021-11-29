@@ -4,8 +4,7 @@ body {
 }
 
 img {
-    height: 40vh;
-    margin-bottom: 2%;
+    width: 10vw;
 }
 
 header {
@@ -17,13 +16,25 @@ header {
     justify-content: center;
 }
 
+#searchdiv{
+    width: 12%;
+    margin-left: 1%;
+    float: left;
+    border: 2px;
+    border-color: black;
+}
+
 #search {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    margin-top: 2%;
-    margin-left: 2%;
+}
+
+#cardsdiv {
+    width: 74%;
+    float: left;
+    text-align: center;
 }
 
 #cards {
@@ -31,20 +42,55 @@ header {
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin-top: 2%;
+}
+
+#decks {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 12%;
+    margin-left: 1%;
+    float: left;
+    border: 2px;
+    border-color: black;
+}
+
+.colorbox {
+    display: inline;
+}
+
+.carddiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5%;
 }
 
 #pagebtns {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
 }
 
 .btn {
     margin-inline: 3%;
 }
 
+input[type='number']{
+    width: 60px;
+} 
+
 .hide {
     display: none;
+}
+
+#cardhoverimg {
+    width: 26%;
+    position: fixed;
+    left: 37%;
+    top: 10%;
+    z-index: 5;
 }
