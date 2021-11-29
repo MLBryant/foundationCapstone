@@ -283,47 +283,51 @@ const createDeck = event => {
 }
 
 const createCards = res => {
-    console.log(res.data);
-    cardsArr = []
-    res.data.cards.forEach((elem, i) => {
-        let {name, imageUrl, types, subtypes, manaCost, cmc, multiverseid, basicLand} = elem
-        let cardsArrObj = {
-            name: name,
-            imageUrl: imageUrl,
-            types: types,
-            subtypes: subtypes,
-            manaCost: manaCost,
-            cmc: cmc,
-            multiverseid: multiverseid,
-            basicLand: basicLand,
-            count: 1
+    if (res.data.cards.length == 0) {
+        cardsDiv.textContent = 'No Cards Match Your Search'
+    } else {
+        console.log(res.data);
+        cardsArr = []
+        res.data.cards.forEach((elem, i) => {
+            let {name, imageUrl, types, subtypes, manaCost, cmc, multiverseid, basicLand} = elem
+            let cardsArrObj = {
+                name: name,
+                imageUrl: imageUrl,
+                types: types,
+                subtypes: subtypes,
+                manaCost: manaCost,
+                cmc: cmc,
+                multiverseid: multiverseid,
+                basicLand: basicLand,
+                count: 1
+            }
+            if (elem.hasOwnProperty('power')) {
+                cardsArrObj.power = elem.power
+                cardsArrObj.toughness = elem.toughness
+            }
+            if (elem.hasOwnProperty('loyalty')) {
+                cardsArrObj.loyalty = elem.loyalty
+            }
+            cardsArr.push(cardsArrObj)
+            let cardDiv = document.createElement('div')
+            cardDiv.innerHTML = `<img src = '${imageUrl}' onmouseover = 'mouseoverImg("${imageUrl}")' onmouseout = 'mouseoutImg()'>`
+            cardDiv.classList.add('carddiv')
+            // let newCard = document.createElement('img')
+            let newCardBtn = document.createElement('button')
+            // newCard.src = imageUrl
+            newCardBtn.id = i
+            newCardBtn.textContent = 'Add Card to Deck'
+            newCardBtn.addEventListener('click', addCard)
+            // cardDiv.appendChild(newCard)
+            cardDiv.appendChild(newCardBtn)
+            cardsDiv.appendChild(cardDiv)
+        })
+        if (res.data.morePages == true) {
+            nextBtn.classList.remove('hide')
         }
-        if (elem.hasOwnProperty('power')) {
-            cardsArrObj.power = elem.power
-            cardsArrObj.toughness = elem.toughness
+        if (pageNumber != 1) {
+            prevBtn.classList.remove('hide')
         }
-        if (elem.hasOwnProperty('loyalty')) {
-            cardsArrObj.loyalty = elem.loyalty
-        }
-        cardsArr.push(cardsArrObj)
-        let cardDiv = document.createElement('div')
-        cardDiv.innerHTML = `<img src = '${imageUrl}' onmouseover = 'mouseoverImg("${imageUrl}")' onmouseout = 'mouseoutImg()'>`
-        cardDiv.classList.add('carddiv')
-        // let newCard = document.createElement('img')
-        let newCardBtn = document.createElement('button')
-        // newCard.src = imageUrl
-        newCardBtn.id = i
-        newCardBtn.textContent = 'Add Card to Deck'
-        newCardBtn.addEventListener('click', addCard)
-        // cardDiv.appendChild(newCard)
-        cardDiv.appendChild(newCardBtn)
-        cardsDiv.appendChild(cardDiv)
-    })
-    if (res.data.morePages == true) {
-        nextBtn.classList.remove('hide')
-    }
-    if (pageNumber != 1) {
-        prevBtn.classList.remove('hide')
     }
 }
 
