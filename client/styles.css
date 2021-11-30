@@ -52,9 +52,9 @@ p {
 }
 
 #searchdiv{
-    width: 11%;
+    width: 13%;
     height: 87vh;
-    padding-left: 2%;
+    padding-left: 5%;
     float: left;
     opacity: 100%;
 }
@@ -68,7 +68,7 @@ p {
 }
 
 #cardsdiv {
-    width: 74%;
+    width: 64%;
     height: 87vh;
     float: left;
     text-align: center;
@@ -87,7 +87,7 @@ p {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: 12%;
+    width: 17%;
     height: 87vh;
     padding-left: 1%;
     float: left;
@@ -139,6 +139,12 @@ input[type='submit'] {
     margin: 0%;
     margin-bottom: 2px;
     margin-top: 5px;
+}
+
+.deckcardmc {
+    margin: 0%;
+    margin-bottom: 2%;
+    font-size: 12px;
 }
 
 .deckcardbtn {
