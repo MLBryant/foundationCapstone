@@ -178,6 +178,7 @@ const getDecks = () => {
 
 const getCards = () => {
     deckCardsArr = []
+    let totalCount = 0
     axios.get('/cards')
     .then(res => {
         deckDiv.innerHTML = ''
@@ -205,6 +206,7 @@ const getCards = () => {
         res.data.sort((a, b) => a.name.localeCompare(b.name))
         res.data.forEach(elem => {
             if (elem.deck_id == deckId) {
+                totalCount += elem.count
                 let {card_id, name, imageurl, types, manacost, deck_id, deckname, count, basic_land} = elem
                 let deckCardObj = {
                     cardId: card_id,
@@ -253,6 +255,9 @@ const getCards = () => {
             }
         })
         console.log(deckCardsArr);
+        let deckTotal = document.createElement('h3')
+        deckTotal.textContent = `Total Cards:   ${totalCount}`
+        deckDiv.appendChild(deckTotal)
         let deleteDeckBtn = document.createElement('button')
         deleteDeckBtn.textContent = 'Delete Deck'
         deleteDeckBtn.id = 'deletedeckbtn'
