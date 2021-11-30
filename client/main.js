@@ -155,7 +155,7 @@ const selectDeck = event => {
     deckTitle.textContent = ''
     deckId = deckSelect.options[deckSelect.selectedIndex].value
     console.log(deckId);
-    deckTitle.textContent = deckSelect.options[deckSelect.selectedIndex].textContent
+    deckTitle.textContent = deckSelect.options[deckSelect.selectedIndex].textContent + ' Deck'
     getCards()
 }
 
@@ -223,6 +223,7 @@ const getCards = () => {
                 if (elem.types === 'Creature' || elem.types === 'Summon') {
                     let newDeckCardDiv = document.createElement('div')
                     newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}  x  ${elem.count}</p>
+                    <p class = 'deckcardmc'>    ${elem.manacost}</p>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
                     <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>`
@@ -231,6 +232,7 @@ const getCards = () => {
                 if (elem.types === 'Instant' || elem.types === 'Sorcery' || elem.types === 'Enchantment') {
                     let newDeckCardDiv = document.createElement('div')
                     newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}  x  ${elem.count}</p>
+                    <p class = 'deckcardmc'>    ${elem.manacost}</p>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
                     <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>`
@@ -239,6 +241,7 @@ const getCards = () => {
                 if (elem.types === 'Artifact') {
                     let newDeckCardDiv = document.createElement('div')
                     newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}  x  ${elem.count}</p>
+                    <p class = 'deckcardmc'>    ${elem.manacost}</p>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
                     <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>`
