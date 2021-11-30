@@ -255,6 +255,7 @@ const getCards = () => {
         console.log(deckCardsArr);
         let deleteDeckBtn = document.createElement('button')
         deleteDeckBtn.textContent = 'Delete Deck'
+        deleteDeckBtn.id = 'deletedeckbtn'
         deleteDeckBtn.addEventListener('click', deleteDeck)
         deckDiv.appendChild(deleteDeckBtn)
     })

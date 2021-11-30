@@ -1,6 +1,12 @@
 body {
-    background-color: darkgrey;
     margin: 0%;
+    background: url(/images/mtg_background_img.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 100%;
+    z-index: 1;
 }
 
 img {
@@ -9,19 +15,48 @@ img {
 
 header {
     margin: 0%;
-    width: 100%;
-    background-color: azure;
+    background: url(/images/mtg_header_img.jpg) no-repeat center center fixed; 
+    -webkit-background-size: 98vw;
+    -moz-background-size: 98vw;
+    -o-background-size: 98vw;
+    background-size: 98vw;
+    background-color: rgb(19, 19, 19);
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    opacity: 100%;
+    border-bottom: 10px solid black;
+    z-index: 5;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 1.5%;
+    color: whitesmoke;
+    -webkit-text-stroke: 1.5px;
+    -webkit-text-stroke-color: black;
+}
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 20px;
+    margin: 0%;
+    margin-top: 5%;
+    text-decoration: underline;
+}
+
+p {
+    font-size: 18px;
 }
 
 #searchdiv{
-    width: 12%;
-    margin-left: 1%;
+    width: 11%;
+    height: 87vh;
+    padding-left: 2%;
     float: left;
-    border: 2px;
-    border-color: black;
+    opacity: 100%;
 }
 
 #search {
@@ -29,12 +64,15 @@ header {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    opacity: 100%;
 }
 
 #cardsdiv {
     width: 74%;
+    height: 87vh;
     float: left;
     text-align: center;
+    opacity: 100%;
 }
 
 #cards {
@@ -50,10 +88,14 @@ header {
     align-items: flex-start;
     justify-content: flex-start;
     width: 12%;
-    margin-left: 1%;
+    height: 87vh;
+    padding-left: 1%;
     float: left;
-    border: 2px;
-    border-color: black;
+    opacity: 100%;
+}
+
+#decktitle {
+    font-size: 25px;
 }
 
 .colorbox {
@@ -83,12 +125,37 @@ input[type='number']{
     width: 60px;
 } 
 
+#deckselect {
+    margin-top: 3%;
+    font-size: 16px;
+}
+
+.deckcardname {
+    margin: 0%;
+    margin-bottom: 2px;
+    margin-top: 5px;
+}
+
+.deckcardbtn {
+    margin: 0%;
+    padding: 0px 5px;
+}
+
+.deckcardremovebtn {
+    margin: 0%;
+    padding: 0px;
+}
+
+#deletedeckbtn {
+    margin-top: 8px;
+}
+
 .hide {
     display: none;
 }
 
 #cardhoverimg {
-    width: 26%;
+    width: 26vw;
     position: fixed;
     left: 37%;
     top: 10%;
