@@ -1,0 +1,6 @@
+The user can search for cards based on various search parameters
+The user can name and create a deck
+The user can add cards from the search results to the deck
+the user can change the count of a card in the deck
+the user can remove a card from the deck
+the user can delete the deck 

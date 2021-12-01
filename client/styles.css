@@ -7,6 +7,7 @@ body {
     background-size: cover;
     opacity: 100%;
     z-index: 1;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 img {
@@ -16,11 +17,11 @@ img {
 header {
     margin: 0%;
     background: url(/images/mtg_header_img.jpg) no-repeat center center fixed; 
-    -webkit-background-size: 98vw;
-    -moz-background-size: 98vw;
-    -o-background-size: 98vw;
-    background-size: 98vw;
-    background-color: rgb(19, 19, 19);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* background-color: rgb(19, 19, 19); */
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -52,7 +53,7 @@ p {
 }
 
 #searchdiv{
-    width: 13%;
+    width: 12%;
     height: 87vh;
     padding-left: 5%;
     float: left;
@@ -68,7 +69,7 @@ p {
 }
 
 #cardsdiv {
-    width: 64%;
+    width: 66%;
     height: 87vh;
     float: left;
     text-align: center;
@@ -87,11 +88,27 @@ p {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: 17%;
+    width: 16%;
     height: 87vh;
     padding-left: 1%;
     float: left;
     opacity: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    #searchdiv {
+        width: 100%;
+    }
+    #cardsdiv {
+        width: 100%;
+    }
+    #decks {
+        width: 100%;
+    }
+}
+
+#deck {
+    padding-bottom: 5%;
 }
 
 #decktitle {
@@ -123,7 +140,7 @@ p {
 }
 
 input[type='number']{
-    width: 60px;
+    width: 65px;
 }
 
 input[type='submit'] {
@@ -159,6 +176,7 @@ input[type='submit'] {
 
 #deletedeckbtn {
     margin-top: 8px;
+    margin-bottom: 2%;
 }
 
 .hide {

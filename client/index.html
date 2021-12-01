@@ -9,17 +9,17 @@
 </head>
 <body>
     <header>
-        <h1>MTG app</h1>
+        <h1>Magic Gathered</h1>
     </header>
     <section id = 'searchdiv' class = 'column'>
         <h2>Card Search</h2>
         <form id = 'search' action="">
             <label for="name">Card Name</label>
-            <input id = 'name' type="text" size = 15>
+            <input id = 'name' type="text" size = 15 placeholder="Enter Text">
             <label for="type">Type</label>
-            <input id = 'type' type="text" size = 15>
+            <input id = 'type' type="text" size = 15 placeholder="Enter Text">
             <label for="subtype">Subtype</label>
-            <input id = 'subtype' type="text" size = 15>
+            <input id = 'subtype' type="text" size = 15 placeholder="Enter Text">
             <div class = 'colorbox'>
                 <input id = 'white' type="checkbox" value="white">
                 <label for="white"> White</label>
@@ -41,14 +41,14 @@
                 <label for="black"> Black</label>
             </div>
             <label for="text">Text Contains</label>
-            <input id = 'text' type="text" size = 15>
+            <input id = 'text' type="text" size = 15 placeholder="Enter Text">
             <label for="cmc">Converted Mana Cost</label>
-            <input id = 'cmc' type="number" size = 5>
+            <input id = 'cmc' type="number" placeholder="Number">
             <label for="power">Power</label>
-            <input id = 'power' type="number" size = 5>
+            <input id = 'power' type="number" placeholder="Number">
             <label for="toughness">Toughness</label>
-            <input id = 'toughness' type="number" size = 5>
-            <label for="loyalty">Loyalty</label>                <input id = 'loyalty' type="number" size = 5>
+            <input id = 'toughness' type="number" placeholder="Number">
+            <label for="loyalty">Loyalty</label>            <input id = 'loyalty' type="number" placeholder="Number">
             <input type="submit" value = 'Search Cards'>
         </form>
     </section>
