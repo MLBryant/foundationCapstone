@@ -95,18 +95,6 @@ p {
     opacity: 100%;
 }
 
-@media screen and (max-width: 600px) {
-    #searchdiv {
-        width: 100%;
-    }
-    #cardsdiv {
-        width: 100%;
-    }
-    #decks {
-        width: 100%;
-    }
-}
-
 #deck {
     padding-bottom: 5%;
 }
@@ -189,4 +177,19 @@ input[type='submit'] {
     left: 37%;
     top: 10%;
     z-index: -1;
+}
+
+@media screen and (max-width: 600px) {
+    #searchdiv {
+        width: 100%;
+    }
+    #cardsdiv {
+        width: 100%;
+    }
+    #decks {
+        width: 100%;
+    }
+    #hovercardimg {
+        width: 50%;
+    }
 }
