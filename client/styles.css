@@ -54,7 +54,6 @@ p {
 
 #searchdiv{
     width: 12%;
-    height: 87vh;
     padding-left: 5%;
     float: left;
     opacity: 100%;
@@ -70,7 +69,6 @@ p {
 
 #cardsdiv {
     width: 66%;
-    height: 87vh;
     float: left;
     text-align: center;
     opacity: 100%;
@@ -89,7 +87,6 @@ p {
     align-items: flex-start;
     justify-content: flex-start;
     width: 16%;
-    height: 87vh;
     padding-left: 1%;
     float: left;
     opacity: 100%;
@@ -190,9 +187,9 @@ input[type='submit'] {
         width: 100%;
     }
     #hovercardimg {
-        width: 50%;
+        width: 50vw;
     }
     img {
-        width: 19vw;
+        width: 22vw;
     }
 }
