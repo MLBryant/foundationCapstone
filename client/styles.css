@@ -175,6 +175,21 @@ input[type='submit'] {
     z-index: -1;
 }
 
+#confirm {
+    position: fixed;
+    width: 20vw;
+    left: 40vw;
+    top: 40vh;
+    text-align: center;
+    box-sizing: border-box;
+    border: 5px solid red;
+    background-color: ghostwhite;
+}
+
+.confirmbtn {
+    margin: 2%;
+}
+
 @media screen and (max-width: 600px) {
     #searchdiv {
         width: 100%;

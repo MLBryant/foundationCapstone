@@ -23,6 +23,9 @@ const deckTitleDiv = document.getElementById('decktitlediv')
 const deckTitle = document.getElementById('decktitle')
 const deckSelect = document.getElementById('deckselect')
 const hoverImg = document.getElementById('cardhoverimg')
+const confirmDiv = document.getElementById('confirm')
+const confirmDelete = document.getElementById('confirmdelete')
+const cancelDelete = document.getElementById('canceldelete')
 
 let searchInput = {}
 let cardsArr = []
@@ -152,6 +155,11 @@ const addCard = event => {
 
 const selectDeck = event => {
     event.preventDefault()
+    if (confirmDiv.classList.contains('hide') == false) {
+        confirmDiv.classList.add('hide')
+        confirmDelete.removeEventListener('click', deleteDeck)
+        cancelDelete.removeEventListener('click', deleteDeckCancel)
+    }
     deckTitle.textContent = ''
     deckId = deckSelect.options[deckSelect.selectedIndex].value
     console.log(deckId);
@@ -264,7 +272,7 @@ const getCards = () => {
         let deleteDeckBtn = document.createElement('button')
         deleteDeckBtn.textContent = 'Delete Deck'
         deleteDeckBtn.id = 'deletedeckbtn'
-        deleteDeckBtn.addEventListener('click', deleteDeck)
+        deleteDeckBtn.addEventListener('click', deleteDeckConfirm)
         deckDiv.appendChild(deleteDeckBtn)
     })
 }
@@ -358,6 +366,20 @@ const deleteCard = cardId => {
     })
 }
 
+const deleteDeckCancel = event => {
+    event.preventDefault()
+    confirmDiv.classList.add('hide')
+    confirmDelete.removeEventListener('click', deleteDeck)
+    cancelDelete.removeEventListener('click', deleteDeckCancel)
+}
+
+const deleteDeckConfirm = event => {
+    event.preventDefault()
+    confirmDiv.classList.remove('hide')
+    confirmDelete.addEventListener('click', deleteDeck)
+    cancelDelete.addEventListener('click', deleteDeckCancel)
+}
+
 const deleteDeck = event => {
     event.preventDefault()
     axios.delete(`/decks/${deckId}`)
@@ -366,6 +388,9 @@ const deleteDeck = event => {
         deckDiv.innerHTML = ''
         deckTitle.textContent = ''
         getDecks()
+        confirmDiv.classList.add('hide')
+        confirmDelete.removeEventListener('click', deleteDeck)
+        cancelDelete.removeEventListener('click', deleteDeckCancel)
     })
 }
 
