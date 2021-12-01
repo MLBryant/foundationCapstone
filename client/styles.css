@@ -192,4 +192,7 @@ input[type='submit'] {
     #hovercardimg {
         width: 50%;
     }
+    img {
+        width: 19vw;
+    }
 }
