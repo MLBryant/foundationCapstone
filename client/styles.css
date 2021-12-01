@@ -16,6 +16,7 @@ img {
 
 header {
     margin: 0%;
+    width: 100%;
     background: url(/images/mtg_header_img.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -27,7 +28,6 @@ header {
     justify-content: center;
     opacity: 100%;
     border-bottom: 10px solid black;
-    z-index: 5;
 }
 
 h1 {
