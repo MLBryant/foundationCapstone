@@ -176,9 +176,6 @@ input[type='submit'] {
 }
 
 @media screen and (max-width: 600px) {
-    body {
-        height: 600px;
-    }
     #searchdiv {
         width: 100%;
         padding: 0%;

@@ -364,6 +364,7 @@ const deleteDeck = event => {
     .then(res => {
         console.log(res.data);
         deckDiv.innerHTML = ''
+        deckTitle.textContent = ''
         getDecks()
     })
 }
