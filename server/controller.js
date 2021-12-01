@@ -27,7 +27,6 @@ module.exports = {
         }
         axios.get(`${URL}${searchString}`)
         .then(dbRes => {
-            console.log(dbRes.data.cards.length);
             if (dbRes.data.cards.length == 100) {
                 areMorePages = true
             }
@@ -73,7 +72,6 @@ module.exports = {
         .then(dbRes => res.status(200).send(dbRes[0]))
     },
     createDeck: (req, res) => {
-        console.log(req.body);
         let {deckName} = req.body
         sequelize.query(`
             INSERT INTO decks (name)
@@ -92,7 +90,6 @@ module.exports = {
         .then(dbRes => res.status(200).send(dbRes[0]))
     },
     getCards: (req, res) => {
-        console.log(req.body);
         sequelize.query(`
             SELECT cards.card_id, cards.name, cards.imageUrl, cards.types, cards.manaCost, cards.count, cards.basic_land, decks.deck_id, decks.name deckName
             FROM cards
@@ -103,8 +100,10 @@ module.exports = {
         .then(dbRes => res.status(200).send(dbRes[0]))
     },
     addCard: (req, res) => {
-        console.log(req.body);
         let {name, imageUrl, types, subtypes, manaCost, cmc, multiverseid, deckId, basicLand, count} = req.body
+        if (name.includes(`'`)) {
+            name = name.slice(0, name.indexOf(`'`)) + `'` +name.slice(name.indexOf(`'`))
+        }
         sequelize.query(`
             INSERT INTO cards (name, imageUrl, types, subtypes, manaCost, basic_land, deck_id, count)
             VALUES ('${name}', '${imageUrl}', '${types}', '${subtypes}', '${manaCost}', '${basicLand}', '${deckId}', '${count}')

@@ -49,6 +49,7 @@ h3 {
 
 p {
     font-size: 18px;
+    margin: 0%;
 }
 
 #searchdiv{
@@ -136,6 +137,11 @@ input[type='submit'] {
     font-size: 16px;
 }
 
+.deckcarddiv {
+    width: 12vw;
+    margin-bottom: 2px;
+}
+
 .deckcardname {
     margin: 0%;
     margin-bottom: 2px;
@@ -151,6 +157,13 @@ input[type='submit'] {
 .deckcardbtn {
     margin: 0%;
     padding: 0px 5px;
+}
+
+.deckcardbtns {
+    display: flex;
+    justify-content: space-evenly;
+    width: 10vw;
+    margin-bottom: 3px;
 }
 
 .deckcardremovebtn {

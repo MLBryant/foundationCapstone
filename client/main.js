@@ -147,7 +147,6 @@ const addCard = event => {
         cardsArr[event.target.id].deckId = deckSelect.value
         axios.post('/cards', cardsArr[event.target.id])
         .then(res => {
-            console.log(res.data);
             getCards()
         })
     }
@@ -162,12 +161,12 @@ const selectDeck = event => {
     }
     deckTitle.textContent = ''
     deckId = deckSelect.options[deckSelect.selectedIndex].value
-    console.log(deckId);
     deckTitle.textContent = deckSelect.options[deckSelect.selectedIndex].textContent + ' Deck'
     getCards()
 }
 
 const getDecks = () => {
+    decksArr = []
     axios.get('/decks')
     .then(res => {
         deckSelect.innerHTML = ''
@@ -180,6 +179,7 @@ const getDecks = () => {
             deck.value = elem.deck_id
             deck.textContent = elem.name
             deckSelect.appendChild(deck)
+            decksArr.push(elem.name)
         })
     })
 }
@@ -210,7 +210,6 @@ const getCards = () => {
         landTitle.textContent = "Lands:"
         landDiv.appendChild(landTitle)
         deckDiv.appendChild(landDiv)
-        console.log(res.data);
         res.data.sort((a, b) => a.name.localeCompare(b.name))
         res.data.forEach(elem => {
             if (elem.deck_id == deckId) {
@@ -230,42 +229,57 @@ const getCards = () => {
                 deckCardsArr.push(deckCardObj)
                 if (elem.types === 'Creature' || elem.types === 'Summon') {
                     let newDeckCardDiv = document.createElement('div')
-                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}  x  ${elem.count}</p>
+                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
                     <p class = 'deckcardmc'>    ${elem.manacost}</p>
+                    <div class = 'deckcardbtns'>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
+                    <p>${elem.count}</p>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
-                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>`
+                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
+                    </div>`
+                    newDeckCardDiv.classList.add('deckcarddiv')
                     creatureDiv.appendChild(newDeckCardDiv)
                 }
                 if (elem.types === 'Instant' || elem.types === 'Sorcery' || elem.types === 'Enchantment') {
                     let newDeckCardDiv = document.createElement('div')
-                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}  x  ${elem.count}</p>
+                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
                     <p class = 'deckcardmc'>    ${elem.manacost}</p>
+                    <div class = 'deckcardbtns'>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
+                    <p>${elem.count}</p>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
-                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>`
+                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
+                    </div>`
+                    newDeckCardDiv.classList.add('deckcarddiv')
                     spellDiv.appendChild(newDeckCardDiv)
                 }
                 if (elem.types === 'Artifact') {
                     let newDeckCardDiv = document.createElement('div')
-                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}  x  ${elem.count}</p>
+                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
                     <p class = 'deckcardmc'>    ${elem.manacost}</p>
+                    <div class = 'deckcardbtns'>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
+                    <p>${elem.count}</p>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
-                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>`
+                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
+                    </div>`
+                    newDeckCardDiv.classList.add('deckcarddiv')
                     artifactDiv.appendChild(newDeckCardDiv)
                 }
                 if (elem.types === 'Land') {
                     let newDeckCardDiv = document.createElement('div')
-                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}  x  ${elem.count}</p>
+                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
+                    <div class = 'deckcardbtns'>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
+                    <p>${elem.count}</p>
                     <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
-                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>`
+                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
+                    </div>`
+                    newDeckCardDiv.classList.add('deckcarddiv')
                     landDiv.appendChild(newDeckCardDiv)
                 }
             }
         })
-        console.log(deckCardsArr);
         let deckTotal = document.createElement('h3')
         deckTotal.textContent = `Total Cards:   ${totalCount}`
         deckDiv.appendChild(deckTotal)
@@ -287,8 +301,12 @@ const createDeck = event => {
             }
             axios.post(`/decks`, newDeck)
             .then(res => {
-                console.log(res.data);
-                getDecks()
+                getDecks()  
+                setTimeout(function(){for (i = 0; i <= decksArr.length; i++) {
+                    if(deckSelect.options[i].textContent == decksArr[decksArr.length - 1]) {
+                        deckSelect.selectedIndex = i
+                    }
+                } getCards()}, 500)
             })
         } else {
             alert('Deck name already exists')
@@ -303,7 +321,6 @@ const createCards = res => {
     if (res.data.cards.length == 0) {
         cardsDiv.textContent = 'No Cards Match Your Search'
     } else {
-        console.log(res.data);
         cardsArr = []
         res.data.cards.forEach((elem, i) => {
             let {name, imageUrl, types, subtypes, manaCost, cmc, multiverseid, basicLand} = elem
@@ -349,10 +366,8 @@ const createCards = res => {
 }
 
 const updateCard = (cardId, basicLand, count, type) => {
-    console.log(basicLand);
     axios.put(`/cards/${cardId}`, {count, basicLand, type})
     .then(res => {
-        console.log(res.data);
         getCards()
     })
     .catch(error => console.log(error))
@@ -361,7 +376,6 @@ const updateCard = (cardId, basicLand, count, type) => {
 const deleteCard = cardId => {
     axios.delete(`/cards/${cardId}`)
     .then(res => {
-        console.log(res.data);
         getCards()
     })
 }
@@ -384,7 +398,6 @@ const deleteDeck = event => {
     event.preventDefault()
     axios.delete(`/decks/${deckId}`)
     .then(res => {
-        console.log(res.data);
         deckDiv.innerHTML = ''
         deckTitle.textContent = ''
         getDecks()
