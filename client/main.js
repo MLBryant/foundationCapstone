@@ -306,6 +306,9 @@ const createDeck = event => {
                     if(deckSelect.options[i].textContent == decksArr[decksArr.length - 1]) {
                         deckSelect.selectedIndex = i
                     }
+                    deckTitle.textContent = ''
+                    deckId = deckSelect.options[deckSelect.selectedIndex].value
+                    deckTitle.textContent = deckSelect.options[deckSelect.selectedIndex].textContent + ' Deck'
                 } getCards()}, 500)
             })
         } else {
