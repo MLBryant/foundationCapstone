@@ -64,8 +64,8 @@
     <section id = 'decks' class = 'column'>
         <h2>Decks</h2>
         <form id = 'createdeck' action="">
-            <input id = 'deckname' type="text" size = 15>
-            <input type="submit" value="Create Deck">
+            <input id = 'deckname' type="text" size = 15 placeholder="Enter Text">
+            <input id = 'decknamebtn' type="submit" value="Create Deck">
         </form>
         <select id="deckselect">
         </select>
@@ -75,10 +75,22 @@
         <div id = 'deck'></div>
     </section>
     <img id = 'cardhoverimg' class = 'hide' src="" alt="">
-    <div id = confirm class = 'hide'>
-        <p>Are you sure you want to delete this deck?</p>
-        <button id = 'confirmdelete' class = 'confirmbtn'>Yes</button>
-        <button id = 'canceldelete' class = 'confirmbtn'>Cancel</button>
+    <div id = 'editmodal' class = 'modal'>
+        <div id = 'editmodalcontent'>
+            <p>Edit your Deck's name</p>
+            <form id = 'editdeckform' action="">
+                <input id = 'editdeckfield' type="text" required placeholder="Enter Text" size = 15>
+                <input type="submit" value = 'Edit Deck Name'>
+            </form>
+            <button id = 'editcancel'>Cancel</button>
+        </div>
+    </div>
+    <div id = 'confirmmodal' class = 'modal'>
+        <div id = 'confirmmodalcontent'>
+            <p>Are you sure you want to delete this deck?</p>
+            <button id = 'confirmdelete' class = 'confirmbtn'>Yes</button>
+            <button id = 'canceldelete' class = 'confirmbtn'>Cancel</button>
+        </div>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>

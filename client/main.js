@@ -17,15 +17,20 @@ const prevBtn = document.getElementById('previous')
 const nextBtn = document.getElementById('next')
 const decksDiv = document.getElementById('decks')
 const deckNameField = document.getElementById('deckname')
+const deckNameBtn = document.getElementById('decknamebtn')
 const deckForm = document.getElementById('createdeck')
 const deckDiv = document.getElementById('deck')
 const deckTitleDiv = document.getElementById('decktitlediv')
 const deckTitle = document.getElementById('decktitle')
 const deckSelect = document.getElementById('deckselect')
 const hoverImg = document.getElementById('cardhoverimg')
-const confirmDiv = document.getElementById('confirm')
+const confirmModal = document.getElementById('confirmmodal')
 const confirmDelete = document.getElementById('confirmdelete')
 const cancelDelete = document.getElementById('canceldelete')
+const editModal = document.getElementById('editmodal')
+const editDeckForm = document.getElementById('editdeckform')
+const editDeckField = document.getElementById('editdeckfield')
+const cancelEditBtn = document.getElementById('editcancel')
 
 let searchInput = {}
 let cardsArr = []
@@ -154,11 +159,12 @@ const addCard = event => {
 
 const selectDeck = event => {
     event.preventDefault()
-    if (confirmDiv.classList.contains('hide') == false) {
-        confirmDiv.classList.add('hide')
-        confirmDelete.removeEventListener('click', deleteDeck)
-        cancelDelete.removeEventListener('click', deleteDeckCancel)
-    }
+    // if (confirmModal.classList.contains('hide') == false) {
+    //     confirmModal.classList.add('hide')
+    //     confirmModal.zIndex = -1
+    //     confirmDelete.removeEventListener('click', deleteDeck)
+    //     cancelDelete.removeEventListener('click', deleteDeckCancel)
+    // }
     deckTitle.textContent = ''
     deckId = deckSelect.options[deckSelect.selectedIndex].value
     deckTitle.textContent = deckSelect.options[deckSelect.selectedIndex].textContent + ' Deck'
@@ -227,7 +233,7 @@ const getCards = () => {
                     basicLand: basic_land
                 }
                 deckCardsArr.push(deckCardObj)
-                if (elem.types === 'Creature' || elem.types === 'Summon') {
+                if (elem.types.includes('Creature') || elem.types.includes('Summon')) {
                     let newDeckCardDiv = document.createElement('div')
                     newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
                     <p class = 'deckcardmc'>    ${elem.manacost}</p>
@@ -239,54 +245,56 @@ const getCards = () => {
                     </div>`
                     newDeckCardDiv.classList.add('deckcarddiv')
                     creatureDiv.appendChild(newDeckCardDiv)
-                }
-                if (elem.types === 'Instant' || elem.types === 'Sorcery' || elem.types === 'Enchantment') {
-                    let newDeckCardDiv = document.createElement('div')
-                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
-                    <p class = 'deckcardmc'>    ${elem.manacost}</p>
-                    <div class = 'deckcardbtns'>
-                    <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
-                    <p>${elem.count}</p>
-                    <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
-                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
-                    </div>`
-                    newDeckCardDiv.classList.add('deckcarddiv')
-                    spellDiv.appendChild(newDeckCardDiv)
-                }
-                if (elem.types === 'Artifact') {
-                    let newDeckCardDiv = document.createElement('div')
-                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
-                    <p class = 'deckcardmc'>    ${elem.manacost}</p>
-                    <div class = 'deckcardbtns'>
-                    <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
-                    <p>${elem.count}</p>
-                    <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
-                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
-                    </div>`
-                    newDeckCardDiv.classList.add('deckcarddiv')
-                    artifactDiv.appendChild(newDeckCardDiv)
-                }
-                if (elem.types === 'Land') {
-                    let newDeckCardDiv = document.createElement('div')
-                    newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
-                    <div class = 'deckcardbtns'>
-                    <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
-                    <p>${elem.count}</p>
-                    <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
-                    <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
-                    </div>`
-                    newDeckCardDiv.classList.add('deckcarddiv')
-                    landDiv.appendChild(newDeckCardDiv)
-                }
+                    } else if (elem.types.includes('Instant') || elem.types.includes('Sorcery') || elem.types.includes('Enchantment')) {
+                        let newDeckCardDiv = document.createElement('div')
+                        newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
+                        <p class = 'deckcardmc'>    ${elem.manacost}</p>
+                        <div class = 'deckcardbtns'>
+                        <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
+                        <p>${elem.count}</p>
+                        <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
+                        <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
+                        </div>`
+                        newDeckCardDiv.classList.add('deckcarddiv')
+                        spellDiv.appendChild(newDeckCardDiv)
+                        } else if (elem.types.includes('Artifact')) {
+                            let newDeckCardDiv = document.createElement('div')
+                            newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
+                            <p class = 'deckcardmc'>    ${elem.manacost}</p>
+                            <div class = 'deckcardbtns'>
+                            <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
+                            <p>${elem.count}</p>
+                            <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
+                            <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
+                            </div>`
+                            newDeckCardDiv.classList.add('deckcarddiv')
+                            artifactDiv.appendChild(newDeckCardDiv)
+                            } else if (elem.types.includes('Land')) {
+                                let newDeckCardDiv = document.createElement('div')
+                                newDeckCardDiv.innerHTML = `<p class = 'deckcardname' onmouseover = 'mouseoverImg("${elem.imageurl}")' onmouseout = 'mouseoutImg()'>${elem.name}</p>
+                                <div class = 'deckcardbtns'>
+                                <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "minus")'>-</button>
+                                <p>${elem.count}</p>
+                                <button class = 'deckcardbtn' onclick = 'updateCard(${elem.card_id}, ${elem.basic_land}, ${elem.count}, "plus")'>+</button>
+                                <button class = 'deckcardremovebtn' onclick = 'deleteCard(${elem.card_id})'>Remove</button>
+                                </div>`
+                                newDeckCardDiv.classList.add('deckcarddiv')
+                                landDiv.appendChild(newDeckCardDiv)
+                            }
             }
         })
         let deckTotal = document.createElement('h3')
         deckTotal.textContent = `Total Cards:   ${totalCount}`
         deckDiv.appendChild(deckTotal)
+        let editDeckBtn = document.createElement('button')
         let deleteDeckBtn = document.createElement('button')
+        editDeckBtn.textContent = 'Edit Deck Name'
         deleteDeckBtn.textContent = 'Delete Deck'
+        editDeckBtn.id = 'editdeckbtn'
         deleteDeckBtn.id = 'deletedeckbtn'
+        editDeckBtn.addEventListener('click', confirmEdit)
         deleteDeckBtn.addEventListener('click', deleteDeckConfirm)
+        deckDiv.appendChild(editDeckBtn)
         deckDiv.appendChild(deleteDeckBtn)
     })
 }
@@ -320,7 +328,28 @@ const createDeck = event => {
     deckNameField.value = ''
 }
 
+const editDeckName = event => {
+    event.preventDefault()
+    let name = editDeckField.value
+    axios.put(`/decks/${deckId}`, {name})
+    .then(res => {
+        getDecks()  
+        setTimeout(function(){for (i = 0; i <= decksArr.length; i++) {
+            if(deckSelect.options[i].textContent == name) {
+                deckSelect.selectedIndex = i
+            }
+            deckTitle.textContent = ''
+            deckId = deckSelect.options[deckSelect.selectedIndex].value
+            deckTitle.textContent = deckSelect.options[deckSelect.selectedIndex].textContent + ' Deck'
+        } getCards()}, 500)
+        editModal.style.display = 'none'
+        editDeckForm.removeEventListener('submit', editDeckName)
+        cancelEditBtn.removeEventListener('click', cancelEdit)
+    })
+}
+
 const createCards = res => {
+    console.log(res.data.cards);
     if (res.data.cards.length == 0) {
         cardsDiv.textContent = 'No Cards Match Your Search'
     } else {
@@ -385,16 +414,32 @@ const deleteCard = cardId => {
 
 const deleteDeckCancel = event => {
     event.preventDefault()
-    confirmDiv.classList.add('hide')
+    confirmModal.style.display = 'none'
+    // confirmModal.zIndex = -1
     confirmDelete.removeEventListener('click', deleteDeck)
     cancelDelete.removeEventListener('click', deleteDeckCancel)
 }
 
 const deleteDeckConfirm = event => {
     event.preventDefault()
-    confirmDiv.classList.remove('hide')
+    confirmModal.style.display = 'block'
+    // confirmModal.zIndex = 5
     confirmDelete.addEventListener('click', deleteDeck)
     cancelDelete.addEventListener('click', deleteDeckCancel)
+}
+
+const cancelEdit = event => {
+    event.preventDefault()
+    editModal.style.display = 'none'
+    editDeckForm.removeEventListener('click', editDeckName)
+    cancelEditBtn.removeEventListener('click', cancelEdit)
+}
+
+const confirmEdit = event => {
+    event.preventDefault()
+    editModal.style.display = 'block'
+    editDeckForm.addEventListener('submit', editDeckName)
+    cancelEditBtn.addEventListener('click', cancelEdit)
 }
 
 const deleteDeck = event => {
@@ -404,7 +449,7 @@ const deleteDeck = event => {
         deckDiv.innerHTML = ''
         deckTitle.textContent = ''
         getDecks()
-        confirmDiv.classList.add('hide')
+        confirmModal.style.display = 'none'
         confirmDelete.removeEventListener('click', deleteDeck)
         cancelDelete.removeEventListener('click', deleteDeckCancel)
     })
@@ -413,13 +458,13 @@ const deleteDeck = event => {
 const mouseoverImg = (source) => {
     hoverImg.src = source
     hoverImg.classList.remove('hide')
-    hoverImg.style.zIndex = 100
+    // hoverImg.style.zIndex = 100
 }
 
 const mouseoutImg = () => {
     hoverImg.classList.add('hide')
     hoverImg.src = ''
-    hoverImg.style.zIndex = -1
+    // hoverImg.style.zIndex = -1
 }
 
 getDecks()

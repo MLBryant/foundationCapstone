@@ -79,6 +79,16 @@ module.exports = {
         `)
         .then(dbRes => res.status(200).send(dbRes[0]))
     },
+    editDeck: (req, res) => {
+        let {id} = req.params
+        let {name} = req.body
+        sequelize.query(`
+            UPDATE decks
+            SET name = '${name}'
+            WHERE deck_id = ${id};
+        `)
+        .then(dbRes => res.status(200).send(dbRes[0]))
+    },
     deleteDeck: (req, res) => {
         let {id} = req.params
         sequelize.query(`
