@@ -192,11 +192,10 @@ input[type='submit'] {
 }
 
 #cardhoverimg {
-    width: 26vw;
+    width: 0vw;
     position: fixed;
     left: 37%;
     top: 10%;
-    /* z-index: -1; */
 }
 
 .modal {

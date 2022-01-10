@@ -159,12 +159,6 @@ const addCard = event => {
 
 const selectDeck = event => {
     event.preventDefault()
-    // if (confirmModal.classList.contains('hide') == false) {
-    //     confirmModal.classList.add('hide')
-    //     confirmModal.zIndex = -1
-    //     confirmDelete.removeEventListener('click', deleteDeck)
-    //     cancelDelete.removeEventListener('click', deleteDeckCancel)
-    // }
     deckTitle.textContent = ''
     deckId = deckSelect.options[deckSelect.selectedIndex].value
     deckTitle.textContent = deckSelect.options[deckSelect.selectedIndex].textContent + ' Deck'
@@ -415,7 +409,6 @@ const deleteCard = cardId => {
 const deleteDeckCancel = event => {
     event.preventDefault()
     confirmModal.style.display = 'none'
-    // confirmModal.zIndex = -1
     confirmDelete.removeEventListener('click', deleteDeck)
     cancelDelete.removeEventListener('click', deleteDeckCancel)
 }
@@ -423,7 +416,6 @@ const deleteDeckCancel = event => {
 const deleteDeckConfirm = event => {
     event.preventDefault()
     confirmModal.style.display = 'block'
-    // confirmModal.zIndex = 5
     confirmDelete.addEventListener('click', deleteDeck)
     cancelDelete.addEventListener('click', deleteDeckCancel)
 }
@@ -456,15 +448,15 @@ const deleteDeck = event => {
 }
 
 const mouseoverImg = (source) => {
+    hoverImg.style.width = '26vw'
     hoverImg.src = source
     hoverImg.classList.remove('hide')
-    // hoverImg.style.zIndex = 100
 }
 
 const mouseoutImg = () => {
     hoverImg.classList.add('hide')
+    hoverImg.style.width = '0vw'
     hoverImg.src = ''
-    // hoverImg.style.zIndex = -1
 }
 
 getDecks()
