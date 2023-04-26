@@ -37,13 +37,14 @@ module.exports = {
                     if (namesArr.indexOf(name) == -1) {
                         let cardObj = {
                             name: name,
-                            imageUrl: imageUrl,
+                            imageUrl: imageUrl.slice(0, 4) + 's' + imageUrl.slice(4),
                             types: types,
                             subtypes: subtypes,
                             manaCost: manaCost,
                             cmc: cmc,
                             multiverseid: multiverseid,
                         }
+                        console.log(cardObj.imageUrl);
                         if(elem.hasOwnProperty('power')) {
                             cardObj.power = elem.power
                             cardObj.toughness = elem.toughness
