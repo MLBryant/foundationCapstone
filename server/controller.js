@@ -156,8 +156,8 @@ module.exports = {
     },
     seedDb: (req, res) => {
         sequelize.query(`
-        drop table if exists decks;
         drop table if exists cards;
+        drop table if exists decks;
 
             create table decks (
                 deck_id serial primary key, 
