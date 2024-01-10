@@ -24,5 +24,5 @@ app.post('/cards', addCard)
 app.put('/cards/:id', updateCard)
 app.delete('/cards/:id', deleteCard)
 
-const server = process.env.PORT || 4000
+const server = 4000 || process.env.PORT 
 app.listen(server, () => console.log(`Server is running on port ${server}`))
